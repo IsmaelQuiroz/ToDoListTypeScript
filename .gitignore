@@ -1,0 +1,22 @@
+# Dependencias
+/node_modules
+/jspm_packages
+
+# Archivos de compilación de TypeScript
+*.js
+*.js.map
+*.tsbuildinfo
+
+# Salida de compilación (si usas una carpeta específica como 'dist' o 'build')
+/dist
+/build
+
+# Entorno y variables
+.env
+.env.local
+
+# Archivos de sistema y carpetas de editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
