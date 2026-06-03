@@ -4,7 +4,7 @@
 <head>
     <title>Todo List</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/custom.css">   
 </head>
 
 <body>
@@ -52,7 +52,16 @@
     </li>
     </script>
 
-    <script src="node_modules/systemjs/dist/system.js"></script>
+
+<!-- 1. Define las rutas de tus módulos usando un import map -->
+ <script type="systemjs-importmap">
+    {
+      "imports": {
+        "app": "./dist/app.js"
+      }
+    }
+  </script> 
+    <!-- <script src="node_modules/systemjs/dist/system.js"></script>
     
         <script>
             System.config({
@@ -69,7 +78,7 @@
                 }
             });
             System.import('./js/app.js');
-        </script>
+        </script> -->
     
 
 
