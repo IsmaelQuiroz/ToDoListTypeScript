@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "mustache": "^4.2.0",
     "systemjs": "^6.15.1"
   },
   "devDependencies": {
