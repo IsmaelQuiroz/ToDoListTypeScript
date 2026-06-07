@@ -1,3 +1,5 @@
+import * as mustache from 'mustache';
+
 interface Task {
     id: number,
     description: string,
@@ -7,9 +9,11 @@ interface Task {
 class Tasks {
     private _idCount : number = 0;
     private _arrayTask : Array<Task> = [];
+    private _uiInteractor: Tasks_UIInteraction = new Tasks_UIInteraction();
 
     public push(task: Task){
         this._arrayTask.push(task);
+        this._uiInteractor.push(task);
     }
 
     public getNewId(){
@@ -43,6 +47,32 @@ class Tasks_UIInteraction {
             var currentElement = removeTaskButtons[i];
             currentElement.addEventListener("click", this.handleRemoveTaskClick.bind(this));
         }
+    }
+
+    public addAmountToBadge(amount: number){
+        var currentValueTaskBadge = Number(document.getElementById('yourTasksBadge')!.innerHTML);
+        document.getElementById('yourTasksBadge')!.innerHTML = (currentValueTaskBadge + amount).toString();
+    }
+
+    private handleMarkAsDoneClick(event: Event){
+        var target = event.currentTarget;
+        var element = <HTMLButtonElement>target;
+        var row = element.parentElement!.parentElement!;
+        if(!row.classList.contains('task-done')){
+            row.classList.add('task-done');
+            this.addAmountToBadge(-1);
+        }
+    }
+
+    private handleRemoveTaskClick(event: Event){
+        var target = event.currentTarget;
+        var element  = <HTMLButtonElement>target;
+        var row = element.parentElement!.parentElement!;
+        if(!row.classList.contains('task-done')){
+            this.addAmountToBadge(-1);
+        }
+        row.remove();
+    }
 }
 
 let tasks = new Tasks();

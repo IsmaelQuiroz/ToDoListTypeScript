@@ -19,9 +19,10 @@
     "start": "http-server -p 8452"
   },
   "dependencies": {
+    "@types/mustache": "^4.2.6",
     "bootstrap": "^5.3.8",
     "mustache": "^4.2.0",
-    "systemjs": "^6.15.1"
+    "systemjs": "^0.20.19"
   },
   "devDependencies": {
     "http-server": "^14.1.1"
