@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@types/mustache": "^4.2.6",
-    "bootstrap": "^5.3.8",
+    "bootstrap": "^3.4.1",
     "mustache": "^4.2.0",
     "systemjs": "^0.20.19"
   },
