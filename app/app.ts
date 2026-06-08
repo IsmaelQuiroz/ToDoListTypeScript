@@ -16,6 +16,29 @@ class Tasks {
         this._uiInteractor.push(task);
     }
 
+    public markAllAsDone() : void {
+        this._arrayTask.forEach(function(value){
+            value.done = true;
+        });
+        this._uiInteractor.markAllAsDone();
+    }
+
+    public markAsDone(id: number) : void{
+        var that = this;
+        this._arrayTask.forEach(function(value){
+            if(value.id === id){
+                value.done = true;
+                that._uiInteractor.markAsDone(id);
+                return false;
+            }
+        })
+    }
+
+    public removeAll(){
+        this._arrayTask = [];
+        this._uiInteractor.removeAll();
+    }
+
     public getNewId(){
         return this._idCount++;
     }
@@ -47,6 +70,40 @@ class Tasks_UIInteraction {
             var currentElement = removeTaskButtons[i];
             currentElement.addEventListener("click", this.handleRemoveTaskClick.bind(this));
         }
+    }
+
+    public markAsDone(id:number){
+        let tasks = document.getElementsByClassName("list-group-item");
+        for(let i = 0; i < tasks.length; i++){
+            let task = tasks[i];
+            var currentId: number = Number(task.getAttribute("data-id"));
+            if(id === currentId){
+                task.classList.add("task-done");
+                break;
+            }
+        }
+        this.addAmountToBadge(-1);
+    }
+
+    public markAllAsDone(){
+        let tasks = document.getElementsByClassName("list-group-item");
+        for(let i=0; i < tasks.length; i++){
+            let task = tasks[i];
+            task.classList.add("task-done");
+        }
+        this.assignValueToBadge('0');
+    }
+
+    public removeAll(){
+        var tasks = document.getElementsByClassName("list-group-item");
+        while(tasks[0]){
+            tasks[0].remove();
+        }
+        this.assignValueToBadge('0');
+    }
+
+    private assignValueToBadge(value: string){
+        document.getElementById('yourTasksBadge')!.innerHTML = value;
     }
 
     public addAmountToBadge(amount: number){
@@ -96,3 +153,17 @@ function handleAddTaskClick(){
 
     tasks.push(task);
 }
+
+document.getElementById('inputTask')!.addEventListener('keydown', function(event: KeyboardEvent){
+    if(event.keyCode === 13){
+        handleAddTaskClick();
+    }
+},true);
+
+document.getElementById('removeAll')!.addEventListener('click', function() {
+    tasks.removeAll();
+});
+
+document.getElementById('markAllAsDone')!.addEventListener('click',function(){
+    tasks.markAllAsDone();
+});
